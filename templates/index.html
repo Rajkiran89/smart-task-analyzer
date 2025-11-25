@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Task Analyzer</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div class="header">
+        <h1> Smart Task Analyzer</h1>
+        <p>Intelligent priority scoring algorithm</p>
+    </div>
+    
+    <div class="container">
+        <div class="card">
+            <h3>1. Configuration</h3>
+            
+            <label>Strategy Mode</label>
+            <select id="strategy">
+                <option value="smart">🤖 Smart Balance (Recommended)</option>
+                <option value="fastest">⚡ Fastest Wins</option>
+                <option value="impact">💎 High Impact</option>
+                <option value="deadline">🔥 Deadline Driven</option>
+            </select>
+            
+            <label style="margin-top: 20px;">Task Data (JSON)</label>
+            <textarea id="jsonInput">[
+    {
+        "id": 1,
+        "title": "Fix Login Bug",
+        "due_date": "2025-11-20",
+        "estimated_hours": 2,
+        "importance": 10,
+        "dependencies": []
+    },
+    {
+        "id": 2,
+        "title": "Write Documentation",
+        "due_date": "2025-12-05",
+        "estimated_hours": 4,
+        "importance": 5,
+        "dependencies": [1]
+    },
+    {
+        "id": 3,
+        "title": "Redesign Homepage",
+        "due_date": "2025-11-30",
+        "estimated_hours": 12,
+        "importance": 7,
+        "dependencies": []
+    }
+]</textarea>
+
+            <button class="analyze-btn" onclick="analyzeTasks()">Analyze Tasks</button>
+        </div>
+
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h3>2. Results</h3>
+                <div class="view-toggle">
+                    <button id="listViewBtn" class="toggle-btn active" onclick="switchView('list')">List</button>
+                    <button id="matrixViewBtn" class="toggle-btn" onclick="switchView('matrix')">Matrix</button>
+                </div>
+            </div>
+
+            <div id="results">
+                <div style="text-align: center; color: #9ca3af; margin-top: 50px;">
+                    <p>Tasks will appear here.</p>
+                </div>
+            </div>
+
+            <div id="matrix-view" class="matrix-container">
+                <div class="quadrant q1" id="q1-list"><h4>Do First</h4></div>
+                <div class="quadrant q2" id="q2-list"><h4>Schedule</h4></div>
+                <div class="quadrant q3" id="q3-list"><h4>Delegate</h4></div>
+                <div class="quadrant q4" id="q4-list"><h4>Eliminate</h4></div>
+            </div>
+        </div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>
